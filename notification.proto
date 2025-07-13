@@ -1,0 +1,38 @@
+
+syntax = "proto3";
+
+package lupyd.notification;
+
+
+message NotificationType {
+  oneof notification  {
+    FollowType follow = 1;
+    CommentType comment = 2;
+    LikeType like = 3;
+  }
+}
+
+message FollowType {
+  string uname = 1;
+}
+
+message CommentType {
+  string postId = 1;
+  string commentedBy = 2;
+}
+
+message LikeType {
+  string postId = 1;
+  string likedBy = 2;
+}
+
+message Notification {
+  bytes id = 1;
+  bool seen = 2;
+  NotificationType notificationType = 3;
+}
+
+
+message Notifications {
+  repeated Notification notifications = 1;
+}
