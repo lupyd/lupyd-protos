@@ -48,3 +48,7 @@ message Relation {
   string uname = 1;
   bool relation = 2; // true follows, false blocked 
 }
+
+message Relations {
+  repeated Relation relations = 1;
+}
