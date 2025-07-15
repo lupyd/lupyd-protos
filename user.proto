@@ -11,10 +11,8 @@ message BoolValue {
 message FullUser {
   string uname = 1;
   bytes bio = 2;
-  bool pfp = 3;
   string uid = 4;
   float credits = 5;
-  bool chats = 6;
   int32 settings = 7;
 }
 
@@ -32,16 +30,13 @@ message Users {
 }
 message UpdateUserInfo {
   lupyd.post.PostBody bio = 1;
-  BoolValue pfp = 2;
-  BoolValue chats = 3;
   int32 settings = 4;
 }
 
 message User {
   string uname = 1;
   bytes bio = 2;
-  bool pfp = 3;
-  bool chats = 4;
+  bool settings = 3;
 }
 
 message Relation {
