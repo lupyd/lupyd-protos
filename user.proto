@@ -11,9 +11,10 @@ message BoolValue {
 message FullUser {
   string uname = 1;
   bytes bio = 2;
-  string uid = 4;
-  float credits = 5;
-  int32 settings = 7;
+  int32 followers = 3;
+  int32 settings = 4;
+  string uid = 5;
+  float credits = 6;
 }
 
 message FullUserWithProfile {
@@ -36,7 +37,8 @@ message UpdateUserInfo {
 message User {
   string uname = 1;
   bytes bio = 2;
-  bool settings = 3;
+  int32 settings = 3;
+  int32 followers = 4;
 }
 
 message Relation {
