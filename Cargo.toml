@@ -1,0 +1,18 @@
+[package]
+name = "lupyd-protos"
+version = "0.1.0"
+edition = "2021"
+description = "Protocol Buffers for Lupyd"
+license = "MIT"
+repository = "https://github.com/lupyd-foundation/lupyd-protos"
+keywords = ["protobuf", "lupyd"]
+
+[dependencies]
+quick-protobuf = "0.8.1"
+
+[build-dependencies]
+pb-rs = "0.10.0"
+
+
+[lib]
+path = "rust/src/lib.rs"

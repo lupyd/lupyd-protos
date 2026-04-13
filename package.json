@@ -1,0 +1,66 @@
+{
+  "name": "@lupyd/protos",
+  "version": "0.1.0",
+  "description": "Protocol Buffers for Lupyd",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./auth": {
+      "types": "./dist/auth.d.ts",
+      "import": "./dist/auth.js"
+    },
+    "./user": {
+      "types": "./dist/user.d.ts",
+      "import": "./dist/user.js"
+    },
+    "./post": {
+      "types": "./dist/post.d.ts",
+      "import": "./dist/post.js"
+    },
+    "./message": {
+      "types": "./dist/message.d.ts",
+      "import": "./dist/message.js"
+    },
+    "./notification": {
+      "types": "./dist/notification.d.ts",
+      "import": "./dist/notification.js"
+    },
+    "./chats": {
+      "types": "./dist/chats.d.ts",
+      "import": "./dist/chats.js"
+    },
+    "./ads": {
+      "types": "./dist/ads.d.ts",
+      "import": "./dist/ads.js"
+    },
+    "./credits": {
+      "types": "./dist/credits.d.ts",
+      "import": "./dist/credits.js"
+    },
+    "./uuid": {
+      "types": "./dist/uuid.d.ts",
+      "import": "./dist/uuid.js"
+    },
+    "./lupyd-msg": {
+      "types": "./dist/lupyd-msg.d.ts",
+      "import": "./dist/lupyd-msg.js"
+    },
+    "./lupyd-md": {
+      "types": "./dist/lupyd-md.d.ts",
+      "import": "./dist/lupyd-md.js"
+    }
+  },
+  "scripts": {
+    "build": "protoc -I . --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_opt=forceLong=bigint --ts_proto_opt=env=browser --ts_proto_out=./dist ./*.proto",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "ts-proto": "^2.1.0",
+    "typescript": "^6.0.2"
+  }
+}
