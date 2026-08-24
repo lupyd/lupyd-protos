@@ -43,7 +43,7 @@ message User {
 
 message Relation {
   string uname = 1;
-  bool relation = 2; // true follows, false blocked 
+  int32 relation = 2; // bit mask: 1 follows, 2 blocked, 4 accepted
 }
 
 message Relations {
