@@ -54,6 +54,7 @@ message CreatePostDetails {
   bytes replying_to = 6;
   repeated string files = 7;
   bytes editing_from = 8; // body and files will be appended to previous post, everything else is ignored
+  bytes id = 9;
 }
 
 message CreatePostWithFiles {
