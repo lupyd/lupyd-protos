@@ -267,6 +267,7 @@ pub struct CreatePostDetails<'a> {
     pub replying_to: Cow<'a, [u8]>,
     pub files: Vec<Cow<'a, str>>,
     pub editing_from: Cow<'a, [u8]>,
+    pub id: Cow<'a, [u8]>,
 }
 
 impl<'a> MessageRead<'a> for CreatePostDetails<'a> {
@@ -282,6 +283,7 @@ impl<'a> MessageRead<'a> for CreatePostDetails<'a> {
                 Ok(50) => msg.replying_to = r.read_bytes(bytes).map(Cow::Borrowed)?,
                 Ok(58) => msg.files.push(r.read_string(bytes).map(Cow::Borrowed)?),
                 Ok(66) => msg.editing_from = r.read_bytes(bytes).map(Cow::Borrowed)?,
+                Ok(74) => msg.id = r.read_bytes(bytes).map(Cow::Borrowed)?,
                 Ok(t) => { r.read_unknown(bytes, t)?; }
                 Err(e) => return Err(e),
             }
@@ -301,6 +303,7 @@ impl<'a> MessageWrite for CreatePostDetails<'a> {
         + if self.replying_to == Cow::Borrowed(b"") { 0 } else { 1 + sizeof_len((&self.replying_to).len()) }
         + self.files.iter().map(|s| 1 + sizeof_len((s).len())).sum::<usize>()
         + if self.editing_from == Cow::Borrowed(b"") { 0 } else { 1 + sizeof_len((&self.editing_from).len()) }
+        + if self.id == Cow::Borrowed(b"") { 0 } else { 1 + sizeof_len((&self.id).len()) }
     }
 
     fn write_message<W: WriterBackend>(&self, w: &mut Writer<W>) -> Result<()> {
@@ -312,6 +315,7 @@ impl<'a> MessageWrite for CreatePostDetails<'a> {
         if self.replying_to != Cow::Borrowed(b"") { w.write_with_tag(50, |w| w.write_bytes(&**&self.replying_to))?; }
         for s in &self.files { w.write_with_tag(58, |w| w.write_string(&**s))?; }
         if self.editing_from != Cow::Borrowed(b"") { w.write_with_tag(66, |w| w.write_bytes(&**&self.editing_from))?; }
+        if self.id != Cow::Borrowed(b"") { w.write_with_tag(74, |w| w.write_bytes(&**&self.id))?; }
         Ok(())
     }
 }

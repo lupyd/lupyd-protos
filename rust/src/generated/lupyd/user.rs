@@ -282,7 +282,7 @@ impl<'a> MessageWrite for User<'a> {
 #[derive(Debug, Default, PartialEq, Clone)]
 pub struct Relation<'a> {
     pub uname: Cow<'a, str>,
-    pub relation: bool,
+    pub relation: i32,
 }
 
 impl<'a> MessageRead<'a> for Relation<'a> {
@@ -291,7 +291,7 @@ impl<'a> MessageRead<'a> for Relation<'a> {
         while !r.is_eof() {
             match r.next_tag(bytes) {
                 Ok(10) => msg.uname = r.read_string(bytes).map(Cow::Borrowed)?,
-                Ok(16) => msg.relation = r.read_bool(bytes)?,
+                Ok(16) => msg.relation = r.read_int32(bytes)?,
                 Ok(t) => { r.read_unknown(bytes, t)?; }
                 Err(e) => return Err(e),
             }
@@ -304,12 +304,12 @@ impl<'a> MessageWrite for Relation<'a> {
     fn get_size(&self) -> usize {
         0
         + if self.uname == "" { 0 } else { 1 + sizeof_len((&self.uname).len()) }
-        + if self.relation == false { 0 } else { 1 + sizeof_varint(*(&self.relation) as u64) }
+        + if self.relation == 0i32 { 0 } else { 1 + sizeof_varint(*(&self.relation) as u64) }
     }
 
     fn write_message<W: WriterBackend>(&self, w: &mut Writer<W>) -> Result<()> {
         if self.uname != "" { w.write_with_tag(10, |w| w.write_string(&**&self.uname))?; }
-        if self.relation != false { w.write_with_tag(16, |w| w.write_bool(*&self.relation))?; }
+        if self.relation != 0i32 { w.write_with_tag(16, |w| w.write_int32(*&self.relation))?; }
         Ok(())
     }
 }

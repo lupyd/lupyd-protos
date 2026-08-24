@@ -53,6 +53,7 @@ export interface CreatePostDetails {
     files: string[];
     /** body and files will be appended to previous post, everything else is ignored */
     editingFrom: Uint8Array;
+    id: Uint8Array;
 }
 export interface CreatePostWithFiles {
     /** required */
