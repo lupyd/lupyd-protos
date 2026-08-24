@@ -1,10 +1,10 @@
-export * as ads from "./ads.js";
-export * as auth from "./auth.js";
-export * as chats from "./chats.js";
-export * as credits from "./credits.js";
-export * as lupydMarkdown from "./lupyd-md.js";
-export * as notification from "./notification.js";
-export * as post from "./post.js";
-export * as user from "./user.js";
-export * as uuid from "./uuid.js";
+export * as ads from "./ads";
+export * as auth from "./auth";
+export * as chats from "./chats";
+export * as credits from "./credits";
+export * as lupydMarkdown from "./lupyd-md";
+export * as notification from "./notification";
+export * as post from "./post";
+export * as user from "./user";
+export * as uuid from "./uuid";
 //# sourceMappingURL=index.d.ts.map

@@ -1,6 +1,6 @@
 {
   "name": "@lupyd/protos",
-  "version": "0.1.0",
+  "version": "1.1.1",
   "description": "Protocol Buffers for Lupyd",
   "license": "MIT",
   "type": "module",
@@ -9,11 +9,21 @@
   "exports": {
     ".": {
       "types": "./typescript/dist/index.d.ts",
-      "import": "./typescript/dist/index.js"
+      "import": "./typescript/dist/index.js",
+      "require": "./typescript/dist/index.js",
+      "default": "./typescript/dist/index.js"
+    },
+    "./*.js": {
+      "types": "./typescript/dist/*.d.ts",
+      "import": "./typescript/dist/*.js",
+      "require": "./typescript/dist/*.js",
+      "default": "./typescript/dist/*.js"
     },
     "./*": {
       "types": "./typescript/dist/*.d.ts",
-      "import": "./typescript/dist/*.js"
+      "import": "./typescript/dist/*.js",
+      "require": "./typescript/dist/*.js",
+      "default": "./typescript/dist/*.js"
     }
   },
   "files": [
