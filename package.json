@@ -2,6 +2,7 @@
   "name": "@lupyd/protos",
   "version": "0.1.0",
   "description": "Protocol Buffers for Lupyd",
+  "license": "MIT",
   "type": "module",
   "main": "./typescript/dist/index.js",
   "types": "./typescript/dist/index.d.ts",
@@ -9,14 +10,45 @@
     ".": {
       "types": "./typescript/dist/index.d.ts",
       "import": "./typescript/dist/index.js"
+    },
+    "./*": {
+      "types": "./typescript/dist/*.d.ts",
+      "import": "./typescript/dist/*.js"
     }
   },
+  "files": [
+    "typescript/dist",
+    "*.proto",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lupyd-foundation/lupyd-protos.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lupyd-foundation/lupyd-protos/issues"
+  },
+  "homepage": "https://github.com/lupyd-foundation/lupyd-protos#readme",
+  "keywords": [
+    "protobuf",
+    "lupyd",
+    "protocol-buffers",
+    "typescript",
+    "ts-proto"
+  ],
   "scripts": {
     "build-protos": "protoc -I . --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_opt=forceLong=bigint --ts_proto_opt=env=browser --ts_proto_out=typescript/src ./*.proto",
+    "clean": "rm -rf typescript/dist",
     "build": "tsc -p typescript",
-    "clean": "rm -rf dist"
+    "prepack": "npm run build",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
+    "protobufjs": "^7.4.0",
     "ts-proto": "^2.1.0",
     "typescript": "^6.0.2"
   },
